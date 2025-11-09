@@ -15,6 +15,11 @@ public abstract class Piece {
         this.piece_value = piece_value;
     }
 
+    public abstract boolean valid_move     (ChessBoard board, int x_destination, int y_destination);
+    public abstract boolean move_piece_to  (ChessBoard board, int x_destination, int y_destination);
+    public abstract boolean valid_capture  (ChessBoard board, int x_destination, int y_destination);
+    public abstract boolean capture_piece  (ChessBoard board, int x_destination, int y_destination);
+
     public void setColour(Colour colour) {
         this.colour = colour;
     }
@@ -38,12 +43,5 @@ public abstract class Piece {
     public void setX(int x) {
         this.x = x;
     }
-
-    public abstract boolean valid_move(int x_destination, int y_destination);
-
-    public abstract boolean move_piece_to(int x_destination, int y_destination);
-
-    public abstract boolean valid_capture(int x_destination, int y_destination);
-
 }
 
