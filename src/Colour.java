@@ -1,4 +1,4 @@
-public enum Colour{
+public enum Colour {
     WHITE,
     BLACK
 }

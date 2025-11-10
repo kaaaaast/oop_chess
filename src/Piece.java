@@ -17,8 +17,6 @@ public abstract class Piece {
 
     public abstract boolean valid_move     (ChessBoard board, int x_destination, int y_destination);
     public abstract boolean move_piece_to  (ChessBoard board, int x_destination, int y_destination);
-    public abstract boolean valid_capture  (ChessBoard board, int x_destination, int y_destination);
-    public abstract boolean capture_piece  (ChessBoard board, int x_destination, int y_destination);
 
     public void setColour(Colour colour) {
         this.colour = colour;

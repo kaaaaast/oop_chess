@@ -1,8 +1,10 @@
 public class Rook extends Piece {
     private Colour colour;
+    private boolean has_moved;
 
     public Rook(int x, int y, Colour colour){
         super(x,y,colour,5);
+        has_moved = false;
     }
 
     @Override
@@ -15,10 +17,5 @@ public class Rook extends Piece {
     @Override
     public boolean move_piece_to(ChessBoard board, int i, int j) {
          return false;
-    }
-
-    @Override
-    public boolean valid_capture(ChessBoard board, int i, int j) {
-        return false;
     }
 }

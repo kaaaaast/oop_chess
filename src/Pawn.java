@@ -3,15 +3,15 @@ public class Pawn extends Piece {
     private boolean has_moved;
     private boolean is_promoted;
 
-    public Pawn(int x, int y, Colour colour, boolean has_moved) {
+    public Pawn(int x, int y, Colour colour) {
         super(x,y,colour,1);
-        this.has_moved = false;
-        this.is_promoted = false;
+        has_moved = false;
+        is_promoted = false;
     }
 
     @Override
     public boolean valid_move(ChessBoard board, int i, int j) {
-        if (has_moved) {
+        if (!has_moved) {
             if ((j != this.getY() + 1 && j != this.getY() + 2)){
                 throw new IllegalArgumentException("Pawn can either move 1 square or 2 squares, as its first move.");
             }
@@ -47,7 +47,6 @@ public class Pawn extends Piece {
         return true;
     }
 
-    @Override
     public boolean valid_capture(ChessBoard board, int i, int j) {
         if (i != this.getX() - 1 && i != this.getX() + 1 && j != this.getY() + 1) {
             return false;
@@ -55,7 +54,6 @@ public class Pawn extends Piece {
         else return board.check_board(i + 1, j + 1) != null || (board.check_board(i + 1, j - 1) != null);
     }
 
-    @Override
     public boolean capture_piece(ChessBoard board, int i, int j){
         if (!(valid_capture(board,i,j))){
             return false;
