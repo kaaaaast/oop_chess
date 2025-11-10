@@ -19,8 +19,4 @@ public class Knight extends Piece {
         return false;
     }
 
-    @Override
-    public boolean valid_capture(ChessBoard board, int i, int j) {
-        return false;
-    }
 }

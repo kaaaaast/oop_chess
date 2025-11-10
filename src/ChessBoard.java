@@ -1,7 +1,7 @@
 public class ChessBoard {
     private Piece[][] board;
 
-    public ChessBoard(){
+    public ChessBoard() {
         this.board = new Piece[8][8];
         setupBoard();
     }
@@ -9,53 +9,47 @@ public class ChessBoard {
     public void setupBoard() {
 
         // PAWNS
-
-        for (int i = 0; i < board.length; i++) {
-            board[i][1] = new Pawn(i,1,Colour.BLACK);
-            board[i][6] = new Pawn(i,6,Colour.WHITE);
+        for (int i = 0; i < 8; i++) {
+            board[i][1] = new Pawn(i, 1, Colour.BLACK);  // black pawns setup
+            board[i][6] = new Pawn(i, 6, Colour.WHITE);  // white pawns setup
         }
 
-        // KNIGHTS
-
-        board[0][1] = new Knight(0,1,Colour.BLACK);
-        board[0][6] = new Knight(0,6,Colour.BLACK);
-        board[7][1] = new Knight(1,6,Colour.WHITE);
-        board[7][6] = new Knight(7,6,Colour.WHITE);
-
         // ROOKS
+        board[0][0] = new Rook(0, 0, Colour.BLACK);
+        board[7][0] = new Rook(7, 0, Colour.BLACK);
+        board[0][7] = new Rook(0, 7, Colour.WHITE);
+        board[7][7] = new Rook(7, 7, Colour.WHITE);
 
-        board[0][0] = new Rook(0,0,Colour.BLACK);
-        board[0][7] = new Rook(0,7,Colour.BLACK);
-        board[7][0] = new Rook(7,0,Colour.WHITE);
-        board[7][7] = new Rook(7,7,Colour.WHITE);
+        // KNIGHTS
+        board[1][0] = new Knight(1, 0, Colour.BLACK);
+        board[6][0] = new Knight(6, 0, Colour.BLACK);
+        board[1][7] = new Knight(1, 7, Colour.WHITE);
+        board[6][7] = new Knight(6, 7, Colour.WHITE);
 
         // BISHOPS
-
-        board[0][2] = new Bishop(0,2,Colour.BLACK);
-        board[0][5] = new Bishop(0,5,Colour.BLACK);
-        board[7][2] = new Bishop(7,2,Colour.WHITE);
-        board[7][6] = new Bishop(7,6,Colour.WHITE);
+        board[2][0] = new Bishop(2, 0, Colour.BLACK);
+        board[5][0] = new Bishop(5, 0, Colour.BLACK);
+        board[2][7] = new Bishop(2, 7, Colour.WHITE);
+        board[5][7] = new Bishop(5, 7, Colour.WHITE);
 
         // QUEENS
-
-        board[7][3] = new Queen(7,3,Colour.WHITE);
-        board[0][3] = new Queen(0,3,Colour.BLACK);
+        board[3][0] = new Queen(3, 0, Colour.BLACK);
+        board[3][7] = new Queen(3, 7, Colour.WHITE);
 
         // KINGS
-
-        board[7][4] = new King(7,4,Colour.WHITE);
-        board[0][4] = new King(0,4,Colour.BLACK);
+        board[4][0] = new King(4, 0, Colour.BLACK);
+        board[4][7] = new King(4, 7, Colour.WHITE);
     }
 
     public Piece check_board(int i, int j) {
-        if (i < 1 || i > 8 || j < 1 || j > 8) {
+        if (i < 0 || i > 7 || j < 0 || j > 7) {
             throw new IllegalArgumentException("You are trying to check outside of the board.");
         }
         return board[i][j];
     }
 
-    public boolean setPiece(Piece piece, int i, int j){
-        if (i < 1 || i > 8 || j < 1 || j > 8){
+    public boolean setPiece(Piece piece, int i, int j) {
+        if (i < 0 || i > 7 || j < 0 || j > 7) {
             throw new IllegalArgumentException("You are setting a piece outside of the board.");
         }
         if (piece == null) {

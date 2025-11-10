@@ -6,7 +6,7 @@ public abstract class Piece {
     private int piece_value;
 
     public Piece(int x, int y, Colour colour, int piece_value){
-        if (x < 1 || x > 8 || y < 1 || y > 8) {
+        if (x < 0 || x > 7 || y < 0 || y > 7) {
             throw new IllegalArgumentException("Both coordinates must be between 1 and 8");
         }
         this.x = x;
