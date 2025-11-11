@@ -11,11 +11,21 @@ public class Pawn extends Piece {
 
     @Override
     public boolean valid_move(ChessBoard board, int i, int j) {
+
+        if (!check_coords(i,j)){
+            return false;
+        }
+
+        if (!isPathReachable(board,i,j)){
+            return false;
+        }
+
         if (!has_moved) {
             if ((j != this.getY() + 1 && j != this.getY() + 2)){
                 throw new IllegalArgumentException("Pawn can either move 1 square or 2 squares, as its first move.");
             }
         }
+
         else {
             if (j != this.getY() + 1 && i != this.getX()){
                 throw new IllegalArgumentException("Pawn can only move 1 square forward.");

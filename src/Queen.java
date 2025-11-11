@@ -8,6 +8,15 @@ public class Queen extends Piece {
 
     @Override
     public boolean valid_move(ChessBoard board, int x_destination, int y_destination) {
+
+        if(!check_coords(x_destination,y_destination)){
+            return false;
+        }
+
+        if (!isPathReachable(board,x_destination,y_destination)){
+            return false;
+        }
+
         int deltaX = this.getX() - x_destination;
         int deltaY = this.getY() - y_destination;
 

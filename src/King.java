@@ -7,10 +7,25 @@ public class King extends Piece{
         has_moved = false;
     }
 
+    @Override
+    public boolean isPathReachable(ChessBoard board, int x_destination, int y_destination) {
+        super.isPathReachable(board, x_destination,y_destination);
+        //implement illegal stepping in checks
+        return false;
+    }
 
     @Override
     public boolean valid_move(ChessBoard board, int x_destination, int y_destination) {
-        return false;
+        if (!valid_move(board,x_destination,y_destination)){
+            return false;
+        }
+        if (!isPathReachable(board,x_destination,y_destination)){
+            return false;
+        }
+        if (Math.abs(x_destination - this.getX()) > 1 || Math.abs(y_destination - this.getY()) > 1) {
+            return false;
+        }
+        return true;
     }
 
     @Override

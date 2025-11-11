@@ -9,6 +9,12 @@ public class Rook extends Piece {
 
     @Override
     public boolean valid_move(ChessBoard board, int i, int j) {
+        if (!check_coords(i,j)){
+            return false;
+        }
+        if (!isPathReachable(board,i,j)){
+            return false;
+        }
         return (((i - this.getX() == 0) && (j - this.getY() != 0)) ||
                 ((j - this.getY() == 0) && (i - this.getX() != 0))) &&
                 (board.check_board(i,j) != null);
