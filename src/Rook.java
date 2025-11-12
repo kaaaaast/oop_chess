@@ -18,11 +18,7 @@ public class Rook extends Piece {
         if (!((i == this.getX() && j != this.getY()) || (j == this.getY() && i != this.getX()))) {
             return false;
         }
-        Piece attacked = board.getPiece(i,j);
-        if (attacked == null) {
-            return true;
-        }
-        else return attacked.getColour() != this.getColour();
+        return isThisAttacking(board, i, j);
     }
 
     public boolean valid_capture(ChessBoard board, int x_destination, int y_destination) {

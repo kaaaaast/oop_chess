@@ -47,6 +47,17 @@ public abstract class Piece {
         return true;
     }
 
+    public boolean isThisAttacking(ChessBoard board, int x, int y) {
+        if (!check_coords(x,y)){
+            return false;
+        }
+        Piece attacked = board.getPiece(x,y);
+        if (attacked == null) {
+            return true;
+        }
+        else return attacked.getColour() != this.getColour();
+    }
+
     public Colour getColour() {
         return colour;
     }
