@@ -17,6 +17,10 @@ public class Bishop extends Piece {
         return Math.abs(this.getX() - x_destination) == Math.abs(this.getY() - y_destination) && deltaX != 0;
     }
 
+    public boolean valid_capture(ChessBoard board, int x_destination, int y_destination) {
+        return valid_move(board, x_destination, y_destination);
+    }
+
     @Override
     public boolean move_piece_to(ChessBoard board, int x_destination, int y_destination) {
         return false;

@@ -47,13 +47,13 @@ public class ChessGUI {
 
     private void onSquareClick(int x, int y) {
         if (selectedX == -1 && selectedY == -1) {
-            Piece p = board.check_board(x, y);
+            Piece p = board.getPiece(x, y);
             if (p != null) {
                 selectedX = x;
                 selectedY = y;
             }
         } else {
-            Piece p = board.check_board(selectedX, selectedY);
+            Piece p = board.getPiece(selectedX, selectedY);
             if (p != null) {
                 try {
                     p.move_piece_to(board, x, y);
@@ -70,7 +70,7 @@ public class ChessGUI {
             for (int x = 0; x < 8; x++) {
                 Piece p = null;
                 try {
-                    p = board.check_board(x, y);
+                    p = board.getPiece(x, y);
                 } catch (Exception ignored) {}
 
                 if (p == null) {

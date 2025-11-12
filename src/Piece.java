@@ -17,9 +17,14 @@ public abstract class Piece {
 
     public abstract boolean valid_move     (ChessBoard board, int x_destination, int y_destination);
     public abstract boolean move_piece_to  (ChessBoard board, int x_destination, int y_destination);
+    public abstract boolean valid_capture  (ChessBoard board, int x_destination, int y_destination);
+
+
+
     public boolean check_coords(int x, int y) {
         return x >= 0 && x <= 7 && y >= 0 && y <= 7;
     }
+
     public boolean isPathReachable(ChessBoard board, int x, int y) {
 
         int xStepping = this.getX();
@@ -35,15 +40,11 @@ public abstract class Piece {
             if (xStepping == x && yStepping == y) {
                 break;
             }
-            if (board.check_board(xStepping, yStepping) != null) {
+            if (board.getPiece(xStepping, yStepping) != null) {
                 return false;
             }
         }
         return true;
-    }
-
-    public void setColour(Colour colour) {
-        this.colour = colour;
     }
 
     public Colour getColour() {

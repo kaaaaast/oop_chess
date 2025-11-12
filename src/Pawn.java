@@ -9,66 +9,60 @@ public class Pawn extends Piece {
         is_promoted = false;
     }
 
-    @Override
     public boolean valid_move(ChessBoard board, int i, int j) {
-
-        if (!check_coords(i,j)){
+        if (!check_coords(i, j)) {
             return false;
         }
 
-        if (!isPathReachable(board,i,j)){
-            return false;
+        int dx = i - this.getX();
+        int dy = j - this.getY();
+
+        int direction = (this.getColour() == Colour.WHITE) ? -1 : 1;
+
+        if (dx == 0 && dy == direction) {
+            return board.getPiece(i, j) == null;
         }
 
-        if (!has_moved) {
-            if ((j != this.getY() + 1 && j != this.getY() + 2)){
-                throw new IllegalArgumentException("Pawn can either move 1 square or 2 squares, as its first move.");
-            }
+        if (!has_moved && dx == 0 && dy == 2 * direction) {
+            int midY = this.getY() + direction;
+            return board.getPiece(i, midY) == null && board.getPiece(i, j) == null;
         }
 
-        else {
-            if (j != this.getY() + 1 && i != this.getX()){
-                throw new IllegalArgumentException("Pawn can only move 1 square forward.");
-            }
-            if (board.check_board(i,j) != null) {
-                throw new IllegalArgumentException("Destination square is occupied");
-            }
+        if (Math.abs(dx) == 1 && dy == direction) {
+            return board.getPiece(i, j) != null &&
+                    board.getPiece(i, j).getColour() != this.getColour();
         }
-        return true;
+
+        return false;
     }
+
 
     @Override
     public boolean move_piece_to(ChessBoard board, int i, int j){
-
-        if (!(valid_move(board,i,j))){
+        if (!valid_move(board,i,j)) {
             return false;
         }
-
-        this.setX(i);
-        this.setY(j);
-        board.setPiece(this,i+1,j);
-
-        if (j == 8){
-            is_promoted = true;
+        else {
+            board.setPiece(this,i,j);
+            board.removePiece(this,this.getX(),this.getY());
+            this.setX(i);
+            this.setY(j);
+            this.set_hasMoved();
+            return true;
         }
-        if (!has_moved){
-            has_moved = true;
-        }
-        return true;
     }
 
+    @Override
     public boolean valid_capture(ChessBoard board, int i, int j) {
-        if (i != this.getX() - 1 && i != this.getX() + 1 && j != this.getY() + 1) {
-            return false;
-        }
-        else return board.check_board(i + 1, j + 1) != null || (board.check_board(i + 1, j - 1) != null);
+        return false;
     }
 
     public boolean capture_piece(ChessBoard board, int i, int j){
-        if (!(valid_capture(board,i,j))){
-            return false;
-        }
-        return true;
+        return false;
+    }
+
+    public void set_hasMoved() {
+        this.has_moved = true;
     }
 
     public void promote(PromotionPiece choice) {

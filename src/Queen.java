@@ -33,8 +33,23 @@ public class Queen extends Piece {
     public boolean bishopMovement(int x, int y) {
         return Math.abs(x) == Math.abs(y) && x != 0;
     }
+
+    @Override
+    public boolean valid_capture(ChessBoard board, int x_destination, int y_destination) {
+        return valid_move(board, x_destination, y_destination);
+    }
+
     @Override
     public boolean move_piece_to(ChessBoard board, int x_destination, int y_destination) {
-        return false;
+        if (!valid_capture(board,x_destination,y_destination)) {
+            return false;
+        }
+        else {
+            board.setPiece(this, x_destination, y_destination);
+            board.removePiece(this, this.getX(), this.getY());
+            this.setX(x_destination);
+            this.setY(y_destination);
+            return true;
+        }
     }
 }
